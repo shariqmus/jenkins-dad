@@ -13,9 +13,7 @@ volumes:[
 
   node (label) {
         properties([disableConcurrentBuilds()])
-    try {
-          def pwd = pwd()
-          
+    try {         
           stage ('Clean') {
               deleteDir()
           }
@@ -27,10 +25,8 @@ volumes:[
               }
           }
 
-        //if (env.BRANCH_NAME =~ 'PR-*' || env.BRANCH_NAME =~ 'SRE-*') 
-        {
-          container('cntr') {    
-            stage ('Call second pipeline') {
+          stage ('Call second pipeline') {
+            container('cntr') {    
               ansiColor('xterm') {
                 build job: 'shariq-js/main', parameters: [
                                                           string(name: 'param1', value:'val1')
@@ -38,7 +34,6 @@ volumes:[
               }
             }
           }
-        }
     } 
     catch(error) {
         currentBuild.result = "FAILED"
