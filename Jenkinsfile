@@ -28,7 +28,7 @@ volumes:[
           stage ('Call second pipeline') {
             container('cntr') {    
               ansiColor('xterm') {
-                build job: 'shariq-js/main', parameters: [
+                build job: 'z-shariq-js/main', parameters: [
                                                           string(name: 'param1', value:'val1')
                                                        ], wait: true
               }
